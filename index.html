@@ -1,0 +1,17 @@
+<!doctype html>
+<form id="f">
+  <label>Email <input id="email" name="email" type="email" required></label>
+  <button type="submit">Sign up</button>
+</form>
+<p id="msg"></p>
+<script>
+  document.getElementById('f').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const r = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: document.getElementById('email').value }),
+    });
+    document.getElementById('msg').textContent = 'status ' + r.status;
+  });
+</script>
